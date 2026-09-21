@@ -1,0 +1,21 @@
+name: flyrank-capstone-image-relevance
+run: docker compose up --build -d
+seed: docker compose exec app sh -c "node scripts/download-corpus.js && node scripts/seed.js"
+test: npm test
+evaluate: docker compose exec app node scripts/evaluate.js
+base_url: http://localhost:3200
+endpoints:
+  health: GET /health
+  register: POST /auth/register
+  login: POST /auth/login
+  upload: POST /api/images
+  images: GET /api/images
+  batch: POST /api/batches
+  jobs: GET /api/jobs
+  create_post: POST /api/posts
+  suggestions: GET /api/posts/{id}/images
+  force_candidate: GET /api/posts/{id}/images/{imageId}/check
+  snapshot: POST /api/posts/{id}/matches
+  review: PUT /api/suggestions/{id}/review
+  inspect: GET /api/suggestions/{id}
+  costs: GET /api/costs

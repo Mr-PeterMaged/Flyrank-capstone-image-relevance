@@ -1,0 +1,54 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: local-capstone-only
+      POSTGRES_DB: image_relevance
+    volumes: [postgres-data:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U postgres -d image_relevance"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  ollama:
+    image: ollama/ollama:latest
+    environment:
+      OLLAMA_MAX_LOADED_MODELS: 2
+      OLLAMA_NUM_PARALLEL: 1
+    volumes: [model-data:/root/.ollama]
+    healthcheck:
+      test: [CMD, ollama, list]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  model-setup:
+    image: ollama/ollama:latest
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["ollama pull qwen3-vl:2b && ollama pull all-minilm"]
+    depends_on:
+      ollama: {condition: service_healthy}
+  app:
+    build: .
+    ports: ["127.0.0.1:3200:3200"]
+    environment:
+      HOST: 0.0.0.0
+      DATABASE_URL: postgres://postgres:local-capstone-only@db:5432/image_relevance
+      OLLAMA_URL: http://ollama:11434
+      DATA_DIR: /app/data
+      DAILY_CALL_LIMIT: ${DAILY_CALL_LIMIT:-250}
+      MODEL_TIMEOUT_MS: ${MODEL_TIMEOUT_MS:-300000}
+    volumes: [image-data:/app/data]
+    depends_on:
+      db: {condition: service_healthy}
+      model-setup: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3200/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+volumes:
+  postgres-data:
+  model-data:
+  image-data:

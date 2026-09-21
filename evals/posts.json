@@ -1,0 +1,20 @@
+[
+  {"id":"cal-01","split":"calibration","title":"Red fox face portrait","content":"A close-up portrait of a red fox facing the camera, with pointed ears and orange fur around its eyes.","correctImage":"img-001","subject":"red fox"},
+  {"id":"cal-02","split":"calibration","title":"Black coffee in a white cup","content":"Fresh black coffee served in a white cup and saucer with a teaspoon on a dark table.","correctImage":"img-024","subject":"coffee"},
+  {"id":"cal-03","split":"calibration","title":"An alpine mountain lake","content":"A blue mountain lake surrounded by green meadows and rocky alpine peaks in summer.","correctImage":"img-027","subject":"mountain"},
+  {"id":"cal-04","split":"calibration","title":"A blue car on the coastal road","content":"A vintage turquoise blue car drives along a seaside road beneath clouds and tall street lights.","correctImage":"img-038","subject":"car"},
+  {"id":"cal-05","split":"calibration","title":"Rectangular pizza slices","content":"Two rectangular slices of pizza on a white paper plate on a red metal outdoor table.","correctImage":"img-021","subject":"pizza"},
+  {"id":"cal-06","split":"calibration","title":"Galaxies and nebulae","content":"Stars illuminate a distant spiral galaxy and a bright nebula in deep space.","correctImage":null,"subject":null},
+  {"id":"test-01","split":"test","title":"Vulpes vulpes in winter","content":"A Vulpes vulpes walks through white snow. The red fox has a bushy tail and dark legs against the snowy ground.","correctImage":"img-005","subject":"red fox"},
+  {"id":"test-02","split":"test","title":"Red fox drinking at the water","content":"A red fox lowers its head to drink from calm water, with its reflection beneath it and green plants along the bank.","correctImage":"img-003","subject":"red fox"},
+  {"id":"test-03","split":"test","title":"A resting fox on green grass","content":"A red fox lies on a green lawn in front of dark bushes, its body extended and its head raised.","correctImage":"img-004","subject":"red fox"},
+  {"id":"test-04","split":"test","title":"Gray wolf in the snow","content":"A close view of a gray wolf looking down toward snowy ground. Its thick gray fur and pointed ears fill the photograph.","correctImage":"img-008","subject":"gray wolf"},
+  {"id":"test-05","split":"test","title":"Brown bear running","content":"A large brown bear runs forward over green grass with its front paw lifted beside the water.","correctImage":"img-015","subject":"brown bear"},
+  {"id":"test-06","split":"test","title":"Black dog with a green collar","content":"A black domestic dog looks up with its head tilted. A bright green collar contrasts with its dark fur in this portrait.","correctImage":"img-013","subject":"domestic dog"},
+  {"id":"test-07","split":"test","title":"Mother dog nursing puppies","content":"A white domestic dog lies on her side on a plain floor while small puppies nurse alongside her.","correctImage":"img-014","subject":"domestic dog"},
+  {"id":"test-08","split":"test","title":"Pizza in a black pan","content":"A small round pizza topped with cheese and vegetables is served inside a black pan on a dark restaurant table.","correctImage":"img-023","subject":"pizza"},
+  {"id":"test-09","split":"test","title":"Coffee in a dark mug with a cookie","content":"A dark gray coffee mug sits on a matching saucer beside a small biscuit against a plain light background.","correctImage":"img-026","subject":"coffee"},
+  {"id":"test-10","split":"test","title":"Hiking across snowy mountains","content":"A lone hiker with a backpack walks away across a rocky snowy mountain landscape toward rugged peaks beneath a blue sky.","correctImage":"img-029","subject":"mountain"},
+  {"id":"test-11","split":"test","title":"Bicycle on a rainy street","content":"A black and white photograph shows a person walking a bicycle over wet paving, with their reflection in puddles.","correctImage":"img-040","subject":"bicycle"},
+  {"id":"test-12","split":"test","title":"Underwater coral reef","content":"Bright tropical fish swim around a colorful coral reef in clear ocean water.","correctImage":null,"subject":null}
+]

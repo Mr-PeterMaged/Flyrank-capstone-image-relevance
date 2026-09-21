@@ -1,0 +1,6 @@
+PASS browser login, authenticated image preview, job progress and cost summary
+PASS browser matching, guard explanation and persistent human approval
+PASS mobile workspace at 390px without page overflow
+Browser proof: 3/3 passed. Synthetic provider only; not model accuracy evidence.
+(node:16084) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

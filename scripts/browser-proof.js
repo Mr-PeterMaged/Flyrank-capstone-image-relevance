@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import { mkdirSync } from 'node:fs';
+import path from 'node:path';
+import { chromium } from 'playwright';
+import { fixture } from '../tests/helpers.js';
+import { passwordHash } from '../src/security.js';
+import { root } from '../src/config.js';
+const f=await fixture(null),password='synthetic-browser-password';
+await f.pool.query('UPDATE owners SET password_hash=$1 WHERE id=$2',[await passwordHash(password),f.owners[0].id]);
+await f.upload();const post=await f.post();await f.processor.tick();await f.processor.tick();
+const browser=await chromium.launch({headless:true});
+try{
+  const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(f.base);await page.getByLabel('Email',{exact:true}).fill(f.owners[0].email);await page.getByLabel('Password',{exact:true}).fill(password);await page.getByRole('button',{name:'Sign in',exact:false}).click();
+  await page.waitForFunction(()=>document.querySelector('#ready-total').textContent==='1');
+  assert.equal(await page.locator('.image-card img').evaluate(e=>e.complete&&e.naturalWidth>0),true);
+  console.log('PASS browser login, authenticated image preview, job progress and cost summary');
+  await page.locator('#post-select').selectOption(post.data.id);await page.getByRole('button',{name:'Find a confident match'}).click();
+  await page.getByRole('button',{name:'Approve pairing',exact:true}).waitFor();await page.getByRole('button',{name:'Approve pairing',exact:true}).click();
+  await page.getByRole('status').filter({hasText:'Pairing approved'}).waitFor();
+  assert.equal((await f.store.one('SELECT decision FROM reviews')).decision,'approve');
+  console.log('PASS browser matching, guard explanation and persistent human approval');
+  mkdirSync(path.join(root,'docs','screenshots'),{recursive:true});
+  await page.screenshot({path:path.join(root,'docs','screenshots','mock-workspace.png'),fullPage:true});
+  await page.setViewportSize({width:390,height:844});
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  await page.screenshot({path:path.join(root,'docs','screenshots','mock-mobile.png'),fullPage:true});
+  console.log('PASS mobile workspace at 390px without page overflow');
+  assert.deepEqual(errors,[]);console.log('Browser proof: 3/3 passed. Synthetic provider only; not model accuracy evidence.');
+}finally{await browser.close();await f.close();}

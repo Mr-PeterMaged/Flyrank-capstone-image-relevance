@@ -1,0 +1,28 @@
+name: Verify image relevance
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: local-capstone-only
+          POSTGRES_DB: image_relevance
+        ports: ["5434:5432"]
+        options: --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 24, cache: npm}
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - run: npm run test:browser
+      - run: npm audit --audit-level=high
+      - name: No runtime data or credentials
+        run: |
+          if git ls-files | grep -E '(^|/)(data/|models/|node_modules/|\.env$)'; then
+            echo 'Runtime files must stay untracked.'
+            exit 1
+          fi
