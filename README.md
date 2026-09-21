@@ -63,7 +63,7 @@ HTTP, model adapters, guard, worker and database access are separate modules. Sc
 ## Real evaluation
 
 <!-- REAL_EVALUATION_START -->
-Real-model processing/evaluation is in progress. No precision number is claimed yet. Deterministic tests are not evidence of vision or retrieval quality.
+**No top-1 precision number is claimed yet.** A real-model batch was attempted on the development machine (4-core CPU, about 8 GB RAM, Ollama and PostgreSQL in Docker): 0 of 7 Qwen3-VL calls succeeded before Docker became unresponsive, so the run was stopped. Every failed attempt is recorded in the cost ledger. Run the batch on a machine with more memory, then `npm run evaluate`, and paste the result here. Deterministic tests are not evidence of vision or retrieval quality.
 <!-- REAL_EVALUATION_END -->
 
 [Evaluation protocol](evals/README.md): 6 calibration articles select thresholds; 12 separate held-out articles measure exact-image top-1, semantic-subject correctness, coverage and safe abstention. Labels were manually drafted by the assistant from a contact sheet and need intern review. Results are from a tiny curated set, not a claim of production accuracy.
@@ -100,7 +100,7 @@ See [EVIDENCE.md](EVIDENCE.md), [API documentation](docs/API.md), [DESIGN.md](DE
 - API fees are zero for the local provider. A dollar cap is reserved transactionally, alongside the effective daily call cap. Paid/cloud adapters are not implemented. An interrupted call can have unknown token totals; this is recorded, not estimated as successful usage.
 - The workspace shows the first 100 images in summary counts and paginates the library by 12. API lists paginate up to 100. Ranking is bounded to 2,000 candidate images; the intended corpus is about 40–50.
 - Authentication uses hashed opaque sessions and scrypt. This is a local capstone, without email verification, recovery, HTTPS termination, malware scanning or production retention automation.
-- This project is independent of the previous capstone. A new public repository URL and portal submission are still pending. Local-first history will remain visible; public-from-day-one cannot be retroactively claimed.
+- This project is independent of the previous capstone. It was developed locally first and published to GitHub afterwards, so public-from-day-one cannot be claimed. Portal submission is done separately by the owner.
 
 ## Primary references
 

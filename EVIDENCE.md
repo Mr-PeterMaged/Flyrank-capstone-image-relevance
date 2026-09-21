@@ -37,8 +37,10 @@ The executed notebook regenerates full output in `docs/proof/api-tests.txt` and 
 
 ## Real provider evidence
 
-The first Moondream pilot timed out once, then returned a schema-valid 0.5-confidence description. It was flagged, not accepted. Its failures and actual usage are retained. Qwen3-VL 2B is the replacement default; final real evaluation is pending until processing completes. No fabricated score is inserted.
+The first Moondream pilot timed out once, then returned a schema-valid 0.5-confidence description. It was flagged, not accepted. Its failures and actual usage are retained. Qwen3-VL 2B is the replacement default.
+
+A later full-batch attempt with Qwen3-VL 2B (600 s timeout) produced 0 successful vision calls out of 7 failed attempts (about 162 s on average) on a 4-core CPU with under 1 GB free RAM, and then Docker became unresponsive. The run was stopped; failed attempts are in `ai_calls`. Earlier pending jobs from the Moondream pipeline version were superseded by re-running `npm run seed`. The real evaluation therefore remains pending, and no score is inserted.
 
 ## Delivery boundaries
 
-Public repository publication and portal submission remain pending. This project is separate from the prior widget capstone. The user has not yet supplied the new repository URL. The local-first history is disclosed honestly.
+The repository is published at https://github.com/Mr-PeterMaged/Flyrank-capstone-image-relevance. Portal submission remains with the owner. This project is separate from the prior widget capstone. The local-first history is disclosed honestly.
