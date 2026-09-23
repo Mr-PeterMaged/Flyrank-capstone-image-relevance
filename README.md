@@ -1,3 +1,20 @@
+# Lens — Image Relevance Workspace
+
+**Designed and developed by [Peter Maged](https://petermaged.com/).**
+
+Match an image library to editorial content with explainable guardrails and human approval.
+
+## Product and technical overview
+
+- **Implementation:** Node.js 24, Express 5, PostgreSQL, Sharp, Ollama vision and embedding models.
+- **Deployment:** Vercel frontend with an external backend; [DEPLOYMENT.md](DEPLOYMENT.md) contains exact settings and operational requirements.
+- **Ownership:** Peter Maged's project implementation; third-party libraries and upstream materials retain their attribution.
+- **License:** [LICENSE](LICENSE). Available for portfolio review, evaluation and further development under these terms.
+
+For project enquiries and implementation work: [petermaged.com](https://petermaged.com/).
+
+## Engineering guide and existing evidence
+
 # Lens — image understanding and content matching
 
 Understand a licensed image library, retrieve semantic matches for articles, and refuse a pairing when its subject, similarity or confidence does not fit. An editor can inspect every reason, then approve or reject a persisted suggestion.
